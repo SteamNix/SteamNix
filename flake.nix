@@ -32,11 +32,11 @@
 
           # Determine partition suffixes
           if [[ "$disk" =~ ^/dev/nvme ]]; then
-            p1="${disk}p1"
-            p2="${disk}p2"
+            p1="$${disk}p1"
+            p2="$${disk}p2"
           else
-            p1="${disk}1"
-            p2="${disk}2"
+            p1="$${disk}1"
+            p2="$${disk}2"
           fi
 
           # Format partitions
