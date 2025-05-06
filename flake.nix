@@ -1,11 +1,3 @@
-###################################################
-#Place in empty folder and CD into
-#Run "git add flake.nix" 
-#Run "nix build .#install-iso"
-#
-#Copyright © 2025, Leo Newton, All rights reserved.
-###################################################
-
 {
   description = "Auto-install minimal NixOS ISO, config from GitHub, BTRFS, largest disk";
 
@@ -28,7 +20,7 @@
           echo "Selected disk: $disk"
           lsblk "$disk"
 
-          # Zap disk
+          # Zap and wipe disk
           sgdisk --zap-all "$disk"
           wipefs -a "$disk"
 
@@ -38,26 +30,36 @@
           parted -s "$disk" set 1 esp on
           parted -s "$disk" mkpart primary btrfs 513MiB 100%
 
-          mkfs.fat -F32 "$disk"1
-          mkfs.btrfs -f "$disk"2
+          # Determine partition suffixes
+          if [[ "$disk" =~ ^/dev/nvme ]]; then
+            p1="${disk}p1"
+            p2="${disk}p2"
+          else
+            p1="${disk}1"
+            p2="${disk}2"
+          fi
 
-          # Mount
-          mount "$disk"2 /mnt
+          # Format partitions
+          mkfs.fat -F32 "$p1"
+          mkfs.btrfs -f "$p2"
+
+          # Mount partitions
+          mount "$p2" /mnt
           mkdir -p /mnt/boot
-          mount "$disk"1 /mnt/boot
+          mount "$p1" /mnt/boot
 
           # Fetch configuration.nix to /mnt/etc/nixos
           mkdir -p /mnt/etc/nixos
           curl -L -o /mnt/etc/nixos/configuration.nix '${configurationNixUrl}'
           nix-channel --add https://nixos.org/channels/nixos-unstable nixos
           nix-channel --update
+
           # Generate hardware-configuration.nix
           nixos-generate-config --root /mnt
 
           # Install with no root password
           export NIX_CONFIG="experimental-features = flakes"
           export NIX_PATH="nixpkgs=/root/.nix-defexpr/channels/nixos"
-          
           nixos-install --no-root-password
 
           poweroff
@@ -75,7 +77,6 @@
           };
         };
 
-        # Here's the canonical flake usage with nixosSystem
         iso = nixpkgs.lib.nixosSystem {
           inherit system;
 
@@ -90,18 +91,16 @@
               environment.systemPackages = with pkgs; [
                 parted gptfdisk btrfs-progs dosfstools curl util-linux coreutils gnugrep gawk
               ];
-              #services.getty.autologinUser = "root";
+
               users.users.root.password = "";
               boot.initrd.kernelModules = [ "nvme" "ahci" ];
               boot.loader.systemd-boot.enable = true;
               boot.loader.efi.canTouchEfiVariables = true;
-              #services.openssh.enable = false;
             })
           ];
         };
       in {
         packages.install-iso = iso.config.system.build.isoImage;
-        # For reference if you want to use the URL elsewhere
         configurationNixUrl = configurationNixUrl;
       }
     );
