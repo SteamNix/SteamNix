@@ -136,6 +136,7 @@ in {
   ###################
   virtualisation.docker.enable      = true;
   virtualisation.docker.enableOnBoot = false;
+  virtualisation.libvirtd.enable = true;
 
   ###############
   # Users       #
@@ -143,7 +144,7 @@ in {
   users.users.steamos = {
     isNormalUser = true;
     description  = "SteamOS user";
-    extraGroups  = [ "networkmanager" "wheel" "docker" "video" "seat" "audio" ];
+    extraGroups  = [ "networkmanager" "wheel" "docker" "video" "seat" "audio" "libvirtd" ];
     password     = "steamos";
   };
 
