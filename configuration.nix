@@ -40,6 +40,7 @@ in {
   };
   boot.plymouth.enable     = true;
   boot.consoleLogLevel     = 0;
+  systemd.extraConfig = "DefaultTimeoutStopSec=5s";
 
   ################
   # FileSystems  #
