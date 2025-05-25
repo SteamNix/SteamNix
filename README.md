@@ -19,7 +19,7 @@ SteamOS like experience on NixOS. Clean quiet boot like on SteamDeck. Two second
 https://nixos.org/download/
 
 # Install From Empty Drive using NixOS Minimal  (Do not use GUI Version)
-Use lsblk to find your /dev/ and update first line in install.sh to reflect the target drive.
+Run the following commands once the iso boots up. Use lsblk to find your /dev/ and update first line in install.sh to reflect the target drive.
 ```
 git clone https://github.com/SteamNix/SteamNix
 chmod +x SteamNix/install.sh
