@@ -98,16 +98,6 @@ ln -s /run/current-system/sw/lib/retroarch/cores/ .config/retroarch/
 ```
 NixOS uses hashes as paths and are subject to change. /run/current-system contains static paths to hashed folders. 
 
-# LiveCD AutoInstaller
-* WARNING! Will erase all data on largest drive detected. Place flake.nix in empty folder and CD into folder.
-* To generate ISO:
-  
-  ```
-  git init
-  git add flake.nix 
-  nix build .#install-iso
-  ```
-
 # Password/Login
 ```
 Username: steamos
