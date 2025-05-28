@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 let
-  customFile    = "/etc/nixos/custom.nix";
   customImport  = if builtins.pathExists customFile then [ customFile ] else [];
   chaotic       = builtins.getFlake "github:chaotic-cx/nyx/nyxpkgs-unstable";
   nyxOverlay    = chaotic.overlays.default;
@@ -102,8 +101,8 @@ in {
   ########################
   # Programs & Gaming    #
   ########################
-  #Add this to /etc/nixos/custom.nix to change gamescope aurguments
-  #programs.steam.gamescopeSession.args = ["-w 1920" "-h 1080" "-r 120" "--xwayland-count 2" "-e" "--hdr-enabled" "--mangoapp" ];
+  #Gamescope aurguments (1080P scaling for steam with native resolution of monitor)
+  programs.steam.gamescopeSession.args = ["-w 1920" "-h 1080" "-r 120" "--xwayland-count 2" "-e" "--hdr-enabled" "--mangoapp" ];
   
   programs = {
     appimage = { enable = true; binfmt = true; };
@@ -156,42 +155,6 @@ in {
   security.polkit.enable           = true;
   services.seatd.enable            = true;
   services.openssh.enable          = true;
-
-  ######################
-  # Auto-Update & Timers
-  ######################
-  system.autoUpgrade.enable = true;
-  # Force the ExecStart to use "boot --upgrade" instead of "switch"
-  systemd.services."nixos-upgrade".serviceConfig = lib.mkForce {
-    # Keep any other default settings, but replace ExecStart:
-    ExecStart = "${pkgs.nixos-rebuild}/bin/nixos-rebuild boot --upgrade";
-  };
-
-  systemd.timers."update-configuration-nix" = {
-    enable     = true;
-    wantedBy   = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "daily";
-      Persistent = true;
-    };
-  };
-
-  systemd.services."update-configuration-nix" = {
-    enable      = true;
-    script      = ''
-      set -e
-      curl -fsSL https://raw.githubusercontent.com/SteamNix/SteamNix/refs/heads/main/configuration.nix \
-        -o /etc/nixos/configuration.nix
-    '';
-    path        = [ pkgs.curl ];
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-    };
-    wantedBy = [ "network-online.target" ];
-    after    = [ "network-online.target" ];
-    requires = [ "network-online.target" ];
-  };
 
   ########################
   # System State Version #
