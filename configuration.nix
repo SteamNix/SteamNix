@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 let
-  customImport  = if builtins.pathExists customFile then [ customFile ] else [];
   chaotic       = builtins.getFlake "github:chaotic-cx/nyx/nyxpkgs-unstable";
   nyxOverlay    = chaotic.overlays.default;
 in {
@@ -10,7 +9,7 @@ in {
   ######################
   imports = [
     ./hardware-configuration.nix
-  ] ++ customImport;
+  ];
 
   nixpkgs.overlays = [ nyxOverlay ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
