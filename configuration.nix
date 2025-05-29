@@ -23,7 +23,7 @@ in {
   boot.loader.timeout                  = 0;
   boot.loader.limine.maxGenerations    = 5;
 
-  boot.kernelParams = [ "quiet" "console=/dev/null" ];
+  boot.kernelParams = [ "quiet" ];
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
   boot.kernel.sysctl = {
     "kernel.split_lock_mitigate" = 0;
@@ -81,13 +81,6 @@ in {
   ########################
   # Graphical & Greetd   #
   ########################
-  #Enables COSMIC Desktop with flatpak. Comment out gamescope/greetd lines below first.
-  #services.desktopManager.cosmic.enable = true;
-  #services.displayManager.cosmic-greeter.enable = true;
-  #services.flatpak.enable = true;
-  #xdg.portal.enable = true;
-  #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
   services.xserver.enable            = false;
   services.getty.autologinUser       = "steamos";
   services.greetd = {
