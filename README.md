@@ -106,7 +106,7 @@ Password: steamos
 
 # Custom Password and other local customization
 ```
-Create /etc/nixos/custom.nix with secure permissions:
+Create /etc/nixos/configuration.nix with secure permissions:
 
 sudo touch /etc/nixos/custom.nix
 sudo chmod 600 /etc/nixos/custom.nix
@@ -145,9 +145,9 @@ lrwxrwxrwx 1 root root 10 Apr 20 03:02 08D6-57BE -> ../../sda2
 lrwxrwxrwx 1 root root 10 Apr 20 03:02 bf255b33-3103-444a-8c0f-57b5a6759ef0 -> ../../sda1
 lrwxrwxrwx 1 root root  9 Apr 20 03:02 c8c86bd3-eb06-4010-8309-5724bd18e381 -> ../../sdb
 ```
-Add drive to custom.nix and rebuild and reboot.
+Add drive to configuration.nix and rebuild and reboot.
 ```
-/etc/nixos/custom.nix
+/etc/nixos/configuration.nix
 -------------------------
 
 { config, pkgs, lib, ... }:
@@ -168,10 +168,7 @@ Comment out Gnome desktop lines in configuration.nix and reboot into desktop and
 * [ ] Game banners will be imported for each sortcut
 * [x] Boot time improvement
 * [ ] Add dot files for preconfigured RetroArch settings
-* [x] Create minimal auto installer ISO
 * [ ] Create GH pages site with Documentation
-* [ ] Create Fitgirl Store App with one click fitgirl installs
-* [ ] Shortcut toggle to connect bluetooth controllers
       
 
   
