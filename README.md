@@ -32,7 +32,7 @@ sudo su
 git clone https://github.com/SteamNix/SteamNix
 mv SteamNix/configuration.nix /etc/nixos/
 nix-channel --add https://nixos.org/channels/nixos-unstable nixos
-sudo nixos-rebuild boot --upgrade 
+sudo nixos-rebuild boot --flake --upgrade 
 sudo reboot now
 ```
 
