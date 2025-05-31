@@ -1,17 +1,12 @@
 { config, pkgs, lib, ... }:
 
-let
-  chaotic       = builtins.getFlake "github:chaotic-cx/nyx/nyxpkgs-unstable";
-  nyxOverlay    = chaotic.overlays.default;
-in {
-  ######################
-  # Imports & Overlays #
-  ######################
-  imports = [
-    ./hardware-configuration.nix
-  ];
+{
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
 
-  nixpkgs.overlays = [ nyxOverlay ];
+ 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree         = true;
 
@@ -22,6 +17,7 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout                  = 0;
   boot.loader.limine.maxGenerations    = 5;
+  hardware.amdgpu.initrd.enable = true;
 
   boot.kernelParams = [ "quiet" ];
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
@@ -81,6 +77,13 @@ in {
   ########################
   # Graphical & Greetd   #
   ########################
+  #Enables COSMIC Desktop with flatpak. Comment out gamescope/greetd lines below first.
+ services.desktopManager.cosmic.enable = true;
+ #services.displayManager.cosmic-greeter.enable = true;
+ services.flatpak.enable = true;
+ xdg.portal.enable = true;
+ xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
   services.xserver.enable            = false;
   services.getty.autologinUser       = "steamos";
   services.greetd = {
@@ -91,10 +94,11 @@ in {
     };
   };
 
+
   ########################
   # Programs & Gaming    #
   ########################
-  #Gamescope aurguments (1080P scaling for steam with native resolution of monitor)
+  #Add this to /etc/nixos/custom.nix to change gamescope aurguments
   programs.steam.gamescopeSession.args = ["-w 1920" "-h 1080" "-r 120" "--xwayland-count 2" "-e" "--hdr-enabled" "--mangoapp" ];
   
   programs = {
@@ -148,6 +152,9 @@ in {
   security.polkit.enable           = true;
   services.seatd.enable            = true;
   services.openssh.enable          = true;
+
+  ######################
+  ######################
 
   ########################
   # System State Version #
