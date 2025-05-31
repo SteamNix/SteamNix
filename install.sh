@@ -17,5 +17,5 @@ nix-channel --update
 nixos-generate-config --root /mnt
 export NIX_CONFIG="experimental-features = flakes"
 export NIX_PATH="nixpkgs=/root/.nix-defexpr/channels/nixos"
-nixos-install --no-root-password
+nixos-install --flake /etc/nixos/ --no-root-password
 poweroff
