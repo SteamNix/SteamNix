@@ -106,13 +106,7 @@ Password: steamos
 
 # Custom Password and other local customization
 ```
-Create /etc/nixos/configuration.nix with secure permissions:
-
-sudo touch /etc/nixos/custom.nix
-sudo chmod 600 /etc/nixos/custom.nix
-```
-```
-/etc/nixos/custom.nix
+/etc/nixos/configuration.nix
 -------------------------
 
 { config, pkgs, ... }:
