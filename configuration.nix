@@ -77,13 +77,7 @@
   ########################
   # Graphical & Greetd   #
   ########################
-  #Enables COSMIC Desktop with flatpak. Comment out gamescope/greetd lines below first.
- services.desktopManager.cosmic.enable = true;
- #services.displayManager.cosmic-greeter.enable = true;
- services.flatpak.enable = true;
- xdg.portal.enable = true;
- xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
+ 
   services.xserver.enable            = false;
   services.getty.autologinUser       = "steamos";
   services.greetd = {
@@ -98,7 +92,10 @@
   ########################
   # Programs & Gaming    #
   ########################
-  #Add this to /etc/nixos/custom.nix to change gamescope aurguments
+  services.flatpak.enable = true;
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  
   programs.steam.gamescopeSession.args = ["-w 1920" "-h 1080" "-r 120" "--xwayland-count 2" "-e" "--hdr-enabled" "--mangoapp" ];
   
   programs = {
