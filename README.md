@@ -5,6 +5,7 @@ SteamOS like experience on NixOS. Clean quiet boot like on SteamDeck. Two second
 
 # Requirements
 * Desktop or laptop PC, preferably with AMD GPU or iGPU. (For SteamDeck, see https://github.com/Jovian-Experiments/Jovian-NixOS)
+* Disable Secure Boot
 
 # Features
 * Zero Desktop Bloat. Gamescope is used as window manager.
