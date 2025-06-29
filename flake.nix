@@ -1,6 +1,6 @@
 {
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  inputs.chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
+  inputs.chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
  
   outputs = { nixpkgs, chaotic, ... }: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
