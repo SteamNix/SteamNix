@@ -93,8 +93,6 @@
   # Programs & Gaming    #
   ########################
   services.flatpak.enable = true;
-  #xdg.portal.enable = true;
-  #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   
   programs.steam.gamescopeSession.args = ["-w 1920" "-h 1080" "-r 120" "--xwayland-count 2" "-e" "--hdr-enabled" "--mangoapp" ];
   
