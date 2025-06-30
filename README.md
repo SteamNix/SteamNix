@@ -38,7 +38,16 @@ sudo reboot now
 ```
 
 All Further changes to configuration.nix for the system need to be done through this command and configuration file!
+# Flatpak Setup
+```
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
+Reboot.
 
+# Retrodeck (Batteries included Emulation with ES-DE)
+```
+flatpak install flathub net.retrodeck.retrodeck
+```
 # How to use Steam VDF (Add Non-Steam Games)
 ```
 pipx install steam-vdf
