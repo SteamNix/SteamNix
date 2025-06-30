@@ -153,16 +153,12 @@ Add drive to configuration.nix and rebuild and reboot.
 ```
 /etc/nixos/configuration.nix
 -------------------------
-
-{ config, pkgs, lib, ... }:
-{
 fileSystems."/run/media/steamos/HDD" = {
    device = "/dev/disk/by-uuid/c8c86bd3-eb06-4010-8309-5724bd18e381";
    fsType = "btrfs";
    options = [
      "users"  "nofail" "compress=zstd" "nosuid" "nodev" ];
- }
-}
+ };
 ```
 Comment out Gnome desktop lines in configuration.nix and reboot into desktop and add folder via Desktop steam in storage menu.
 
