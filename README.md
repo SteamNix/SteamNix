@@ -164,13 +164,9 @@ fileSystems."/run/media/steamos/HDD" = {
 ```
 Comment out Gnome desktop lines in configuration.nix and reboot into desktop and add folder via Desktop steam in storage menu.
 
-# TODO
-* [ ] Get this Automount/AddLibrary script working in NixOS: https://github.com/scawp/Steam-Deck.Mount-External-Drive
-* [x] Find VDF python library
-* [ ] Game banners will be imported for each sortcut
-* [x] Boot time improvement
-* [ ] Add dot files for preconfigured RetroArch settings
-* [ ] Create GH pages site with Documentation
+# Controller Support
+https://www.8bitdo.com/ultimate-2-wireless-controller/
+
       
 
   
