@@ -42,8 +42,15 @@ sudo nix flake update --flake /etc/nixos/
 sudo nixos-rebuild boot --flake /etc/nixos/
 sudo reboot now
 ```
+Or via a fish alias by typing "update" :
+```
+~/.config/fish/config.fish
 
-All Further changes to configuration.nix for the system need to be done through this command and configuration file!
+function update
+    sudo nix flake update --flake /etc/nixos/
+    sudo nixos-rebuild boot --flake /etc/nixos/
+end
+```
 # Flatpak Setup
 ```
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
