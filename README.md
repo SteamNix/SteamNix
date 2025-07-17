@@ -9,7 +9,7 @@ SteamOS like experience on NixOS. Clean quiet boot like on SteamDeck. Two second
 
 # Features
 * Zero Desktop Bloat. Gamescope is used as window manager.
-* Latest CachyOS Kernel and BORE
+* Latest CachyOS Kernel and BORE Kernel Scheduler
 * Clean, textless boot. Similar to SteamDeck bootup. Minus the Splash logo.
 * Read-only system files and binaries to prevent corruption or malware.
 * Boot menu with previous system states, incase update breaks system, allowing you to boot to a previous good state.
@@ -34,6 +34,12 @@ git clone https://github.com/SteamNix/SteamNix
 mv SteamNix/configuration.nix /etc/nixos/
 nix-channel --add https://nixos.org/channels/nixos-unstable nixos
 sudo nixos-rebuild boot --flake --upgrade 
+sudo reboot now
+```
+# Keeping System Up-to-date
+```
+sudo nix flake update --flake /etc/nixos/
+sudo nixos-rebuild boot --flake /etc/nixos/
 sudo reboot now
 ```
 
