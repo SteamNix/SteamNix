@@ -164,7 +164,7 @@ fileSystems."/run/media/steamos/HDD" = {
 ```
 Comment out Gnome desktop lines in configuration.nix and reboot into desktop and add folder via Desktop steam in storage menu.
 
-# Controller Support
+# Controller Support (2.4Ghz)
 https://www.8bitdo.com/ultimate-2-wireless-controller/
 
       
