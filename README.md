@@ -57,6 +57,13 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 ```
 Reboot.
 
+# How to install Non-Free Nix Packages with Nix Profile
+Installing Burp Suite by appending "--impure"
+```
+export NIXPKGS_ALLOW_UNFREE=1
+nix profile install nixpkgs#burpsuite --impure
+```
+
 # Retrodeck (Batteries included Emulation with ES-DE)
 ```
 flatpak install flathub net.retrodeck.retrodeck
