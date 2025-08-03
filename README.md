@@ -147,6 +147,13 @@ Password: steamos
   # Any other overrides or settings...
 }
 ```
+# Fingerprint Reader
+```
+services.fprintd.enable = true;
+services.fprintd.tod.enable = true;
+services.fprintd.tod.driver = pkgs.libfprint-2-tod1-elan; # Elan(04f3:0c4b) driver
+security.pam.services.sudo.fprintAuth = true; # PAM for sudo fingerprint
+```
 # Adding another drive
 Find device such as /dev/sda
 ```
