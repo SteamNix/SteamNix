@@ -93,7 +93,9 @@
   # Programs & Gaming    #
   ########################
   services.automatic-timezoned.enable = true;
+  #Allow code-server to run properly
   programs.nix-ld.enable = true;
+  services.code-server.enable
   services.flatpak.enable = true;
   xdg.portal.enable = true;
   xdg.portal.config.common.default = "*";
@@ -141,7 +143,7 @@
   users.users.steamos = {
     isNormalUser = true;
     description  = "SteamOS user";
-    extraGroups  = [ "networkmanager" "wheel" "docker" "video" "seat" "audio" "libvirtd" ];
+    extraGroups  = [ "networkmanager" "wheel" "docker" "video" "seat" "audio" "libvirtd" "code-server"];
     password     = "steamos";
   };
 
