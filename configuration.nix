@@ -90,9 +90,11 @@
 
 
   ########################
-  # Programs & Gaming    #
+  # Programs & Services    #
   ########################
   services.automatic-timezoned.enable = true;
+  zramSwap.enable = true;
+  zramSwap.algorithm = "zstd";
   #Allow code-server to run properly
   programs.nix-ld.enable = true;
   services.code-server.enable = true;
