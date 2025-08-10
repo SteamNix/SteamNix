@@ -1,4 +1,20 @@
-disk="/dev/nvme0n1"
+# Display block devices
+echo "Available block devices:"
+lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
+
+# Prompt user to pick a device
+read -p "Enter the NAME of the device you want to install to (e.g., sda, nvme0n1): " selected_device_name
+
+# Construct the full path and store it in the 'disk' variable
+disk="/dev/${selected_device_name}"
+
+# Verify the selected device is a block device
+if [[ ! -b "$disk" ]]; then
+    echo "Error: '$disk' is not a valid block device or does not exist."
+    exit 1
+fi
+
+echo "You selected: $disk"
 
 sgdisk --zap-all $disk
 parted -s "$disk" mklabel gpt
