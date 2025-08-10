@@ -93,6 +93,7 @@
   # Programs & Gaming    #
   ########################
   services.automatic-timezoned.enable = true;
+  programs.nix-ld.enable = true;
   services.flatpak.enable = true;
   xdg.portal.enable = true;
   xdg.portal.config.common.default = "*";
