@@ -4,11 +4,12 @@
 SteamOS like experience on NixOS. Clean quiet boot like on SteamDeck. Two second shutdown time. Meant for those who primarily use SSH, but would like a SteamOS experience for games. Ditch your expensive laptop and use your gaming PC for VS-Code development! VS-Code server, Docker and libvirt preinstalled.
 
 # Requirements
-* Desktop or laptop PC, preferably with AMD GPU or iGPU. (For SteamDeck, see https://github.com/Jovian-Experiments/Jovian-NixOS)
+* Desktop or laptop PC, preferably with AMD GPU or iGPU.
 * Disable Secure Boot
 
 # Features
 * Zero Desktop Bloat. Gamescope is used as window manager.
+* Uses Jovian-Experiment for full compatability with SteamDecks and AMD based PCs
 * Latest CachyOS Kernel and BORE Kernel Scheduler
 * Clean, textless boot. Similar to SteamDeck bootup. Minus the Splash logo.
 * Read-only system files and binaries to prevent corruption or malware.
@@ -130,23 +131,6 @@ Username: steamos
 Password: steamos
 ```
 
-# Custom Password and other local customization
-```
-/etc/nixos/configuration.nix
--------------------------
-
-{ config, pkgs, ... }:
-
-{
-  # Set a custom password
-  users.users.steamos = {
-    hashedPassword = "$6$TclE7a.../uEI7b."; # Substitute your hash here!
-    # You can generate a hash with: mkpasswd -m sha-512
-  };
-
-  # Any other overrides or settings...
-}
-```
 # Fingerprint Reader
 ```
 services.fprintd.enable = true;
@@ -185,8 +169,6 @@ fileSystems."/run/media/steamos/HDD" = {
 ```
 Comment out Gnome desktop lines in configuration.nix and reboot into desktop and add folder via Desktop steam in storage menu.
 
-# Controller Support (2.4Ghz)
-https://www.8bitdo.com/ultimate-2-wireless-controller/
 
       
 
