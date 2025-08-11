@@ -17,7 +17,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout                  = 0;
   boot.loader.limine.maxGenerations    = 5;
-  hardware.amdgpu.initrd.enable = true;
+  hardware.amdgpu.initrd.enable = false;
 
   boot.kernelParams = [ "quiet" ];
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
@@ -75,17 +75,18 @@
   };
 
   ########################
-  # Graphical & Greetd   #
+  # Graphical & Jovian   #
   ########################
- 
   services.xserver.enable            = false;
-  services.getty.autologinUser       = "steamos";
-  services.greetd = {
-    enable   = true;
-    settings.default_session = {
-      user    = "steamos";
-      command = "steam-gamescope > /dev/null 2>&1";
-    };
+  jovian = {
+    steam.enable = true;
+    steam.autoStart = true;
+    steam.user = "steamos";
+    hardware.has.amd.gpu = true;
+    decky-loader.enable = true;
+    steamos.useSteamOSConfig = true;
+    steam.desktopSession = "gamescope-wayland";
+    
   };
 
 
@@ -98,29 +99,15 @@
   #Allow code-server to run properly
   programs.nix-ld.enable = true;
   services.code-server.enable = true;
-  services.flatpak.enable = true;
-  xdg.portal.enable = true;
-  xdg.portal.config.common.default = "*";
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  #services.flatpak.enable = true;
   
-  programs.steam.gamescopeSession.args = ["-w 1920" "-h 1080" "-r 120" "--xwayland-count 2" "-e" "--hdr-enabled" "--mangoapp" ];
   
   programs = {
     appimage = { enable = true; binfmt = true; };
     fish     = { enable = true; };
     mosh     = { enable = true; };
     tmux     = { enable = true; };
-    gamescope.capSysNice  = true;
-    steam = {
-      enable                = true;
-      gamescopeSession.enable = true;
-      extraCompatPackages   = with pkgs; [ proton-ge-bin ];
-      extraPackages         = with pkgs; [
-        mangohud
-        gamescope-wsi
-      ];
-    };
-  };
+     };
 
   environment.sessionVariables = {
     PROTON_USE_NTSYNC       = "1";
