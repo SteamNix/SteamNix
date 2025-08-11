@@ -10,6 +10,7 @@ SteamOS like experience on NixOS. Clean quiet boot like on SteamDeck. Two second
 # Features
 * Zero Desktop Bloat. Gamescope is used as window manager.
 * Uses Jovian-Experiment for full compatability with SteamDecks and AMD based PCs
+* Decky Loader Plugin System
 * Latest CachyOS Kernel and BORE Kernel Scheduler
 * Clean, textless boot. Similar to SteamDeck bootup. Minus the Splash logo.
 * Read-only system files and binaries to prevent corruption or malware.
