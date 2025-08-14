@@ -78,10 +78,7 @@
   # Graphical & Jovian   #
   ########################
   services.xserver.enable            = false;
-  #Power Button = Power Off
   services.logind.extraConfig = ''HandlePowerKey=poweroff'';
-  #Prevents Screen from shutting off
-  services.xserver.xautolock.enable  = false;
   jovian = {
     steam.enable = true;
     steam.autoStart = true;
