@@ -78,7 +78,7 @@
   # Graphical & Jovian   #
   ########################
   services.xserver.enable            = false;
-  services.logind.extraConfig = ''HandlePowerKey=poweroff'';
+  #services.logind.extraConfig = ''HandlePowerKey=poweroff''; #set power button to shutdown on press
   jovian = {
     steam.enable = true;
     steam.autoStart = true;
