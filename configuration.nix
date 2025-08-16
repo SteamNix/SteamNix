@@ -86,7 +86,7 @@
     hardware.has.amd.gpu = true;
     decky-loader.enable = true;
     steamos.useSteamOSConfig = true;
-    steam.desktopSession = "gamescope-wayland";
+    steam.desktopSession = "cosmic";
     
   };
 
@@ -97,10 +97,11 @@
   services.automatic-timezoned.enable = true;
   zramSwap.enable = true;
   zramSwap.algorithm = "zstd";
+  services.desktopManager.cosmic.enable = true;
   #Allow code-server to run properly
   programs.nix-ld.enable = true;
   services.code-server.enable = true;
-  #services.flatpak.enable = true;
+  services.flatpak.enable = true;
   
   
   programs = {
