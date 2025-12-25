@@ -5,7 +5,7 @@ lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
 # Prompt user to pick a device
 read -p "Enter the NAME of the device you want to install to (e.g., sda, nvme0n1): " selected_device_name
 
-# Construct the full path and store it in the 'disk' variable
+# Construct the full path
 disk="/dev/${selected_device_name}"
 
 # Verify the selected device is a block device
@@ -16,11 +16,22 @@ fi
 
 echo "You selected: $disk"
 
-sgdisk --zap-all $disk
+# Determine partition naming convention
+# If the disk name ends in a number (like nvme0n1), add 'p' before the partition number.
+# Otherwise (like sda), just append the number.
+if [[ "$selected_device_name" =~ [0-9]$ ]]; then
+    part_prefix="${disk}p"
+else
+    part_prefix="${disk}"
+fi
+
+# Wipe and Partition
+sgdisk --zap-all "$disk"
 parted -s "$disk" mklabel gpt
 parted -s "$disk" mkpart ESP fat32 1MiB 1000MiB
 parted -s "$disk" set 1 esp on
-parted -s "$disk" mkpart primary btrfs 1000MiB 100%
+parted -s "$disk" mkpart primary xfs 1000MiB 100%
+#Create Filesystems
 mkfs.fat -F32 "$disk""p1"
 mkfs.btrfs -f "$disk""p2"
 mount "$disk""p2" /mnt
