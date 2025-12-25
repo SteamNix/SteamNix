@@ -49,16 +49,10 @@ parted -s "$disk" mkpart primary btrfs 1000MiB 100%
 partprobe "$disk"
 sleep 2
 
-# --- Encryption ---
-echo "Setting up LUKS encryption on ${part_prefix}2..."
-# Note: This will prompt for a passphrase for the encryption
-cryptsetup luksFormat "${part_prefix}2"
-cryptsetup open "${part_prefix}2" enc
-
 # --- Filesystems ---
 echo "Formatting filesystems..."
 mkfs.fat -F32 "${part_prefix}1"
-mkfs.btrfs -L nixos /dev/mapper/enc
+mkfs.btrfs -L nixos "${part_prefix}2
 
 # --- Mounting ---
 echo "Mounting filesystems..."
