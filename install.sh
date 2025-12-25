@@ -30,7 +30,7 @@ sgdisk --zap-all "$disk"
 parted -s "$disk" mklabel gpt
 parted -s "$disk" mkpart ESP fat32 1MiB 1000MiB
 parted -s "$disk" set 1 esp on
-parted -s "$disk" mkpart primary xfs 1000MiB 100%
+parted -s "$disk" mkpart primary btrfs 1000MiB 100%
 #Create Filesystems
 mkfs.fat -F32 "$disk""p1"
 mkfs.btrfs -f "$disk""p2"
